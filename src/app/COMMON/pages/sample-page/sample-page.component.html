@@ -1,0 +1,322 @@
+<div class="outer-container">
+    <div class="inner-container">
+        <!-- ****************************************** NEW ********************************************** -->
+        <div *ngIf="!componentVisibility" class="centered-content new">
+            <div class="card pageTop pageBottom" id="mainbox">
+                <div class="card-header docs-primary-header" id="mainheader">
+                    <div class="row">
+                        <div class="col-sm-8 col-70">
+                            <div id="height">Sample Page</div>
+                        </div>
+                        <div class="col-sm-4 col-30 right">
+                            <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                <mat-button-toggle (click)="listClick()" id="iButton">
+                                    <mat-icon id="iconButton">clear</mat-icon>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label><strong>Date</strong></label>
+                                    <mat-form-field id="matDate" appearance="outline">
+                                        <mat-label>Choose a date</mat-label>
+                                        <input matInput [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4 responsiveTop">
+                                    <label><strong>Sample Input</strong></label>
+                                    <input type="text" id="value" [(ngModel)]='value'
+                                        class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field class="outLine" appearance="outline">
+                                        <mat-label>Material Input</mat-label>
+                                        <input matInput placeholder="Placeholder">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" id="Top">
+                                <div class="col-sm-4">
+                                    <label><strong>Sample Select</strong></label>
+                                    <select class="form-select form-select-sm border border-secondary">
+                                        <option>Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field class="outLine" appearance="outline">
+                                        <mat-label>Material Select</mat-label>
+                                        <mat-select>
+                                            <mat-option *ngFor="let food of foods" [value]="food.value">
+                                                {{food.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4">
+                                    <mat-form-field class="outLine" appearance="outline">
+                                        <mat-label>Material Autocomplete</mat-label>
+                                        <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                            [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" id="subTop">
+                                <div class="col-sm-4">
+                                    <mat-checkbox>Sample Checkbox</mat-checkbox>
+                                </div>
+                                <div class="col-sm-4 responsiveTop">
+                                    <mat-radio-group aria-label="Select an option">
+                                        <mat-radio-button value="1">Radio 1</mat-radio-button>
+                                        <mat-radio-button value="2">Radio 2</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="col-sm-4 responsiveTop">
+                                    <mat-slide-toggle>Sample Slide</mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="row" id="Top">
+                                <div class="col-sm-12">
+                                    <label><strong>Sample Textarea</strong></label>
+                                    <textarea rows="2" id="textarea"
+                                        class="form-control form-control-sm border border-secondary"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="table-scroll">
+                                <table border='1'>
+                                    <thead class="docs-primary-header">
+                                        <tr>
+                                            <th id="headerOne">S.No</th>
+                                            <th id="headerTwo">Header</th>
+                                            <th id="headerTwo">Header 2</th>
+                                            <th id="headerTwo">Header 3</th>
+                                            <th id="headerLast">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="columnCenter">
+                                                1
+                                            </td>
+                                            <td>
+                                                <input class="form-control form-control-sm inputBox" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td>
+                                            <td id="columnLeft">
+
+                                            </td>
+                                            <td id="columnLeft">
+
+                                            </td>
+                                            <td>
+                                                <!-- <button name="del" matTooltip="Remove" id="delbtn" class="btn btn-sm">
+                                                    <div id="iconBottom">
+                                                        <mat-icon id="iRed">
+                                                            delete
+                                                        </mat-icon>
+                                                    </div>
+                                                </button> -->
+                                                <button class="btn btn-sm" matTooltip="Add"
+                                                    name="add" id="addbtn">
+                                                    <div id="iconBottom">
+                                                        <mat-icon id="iGreen">
+                                                            add
+                                                        </mat-icon>
+                                                    </div>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <th>
+                                        </th>
+                                        <th id="columnLeft">
+                                            Footer
+                                        </th>
+                                        <th id="columnLeft">
+                                            Footer 2
+                                        </th>
+                                        <th id="columnLeft">
+                                            Footer 3
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 right">
+                                    <button mat-raised-button id="matButton"
+                                        color="primary">Save</button>&nbsp;
+                                    <button mat-raised-button id="matButton"
+                                        color="warn">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ****************************************** LIST ********************************************** -->
+        <div *ngIf="componentVisibility" class="centered-content list">
+            <div class="card pageTop pageBottom" id="mainbox">
+                <div class="card-header docs-primary-header" id="mainheader">
+                    <div class="row">
+                        <div class="col-sm-8 col-70">
+                            <div id="height">Sample Page</div>
+                        </div>
+                        <div class="col-sm-4 col-30 right">
+                            <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                <mat-button-toggle (click)="newClick()" id="iButton">
+                                    <mat-icon id="iconButton">add</mat-icon>
+                                </mat-button-toggle>
+                                <mat-button-toggle [matMenuTriggerFor]="menu" id="iButton">
+                                    <mat-icon id="iconButton">more_vert</mat-icon>
+                                </mat-button-toggle>
+                                <mat-button-toggle (click)='_router.navigate([_localStorage.getMenuPath()])'
+                                    id="iButton">
+                                    <mat-icon id="iconButton">clear</mat-icon>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label><strong>From Date</strong></label>
+                                    <mat-form-field id="matDate" appearance="outline">
+                                        <input matInput [matDatepicker]="picker1">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4 responsiveTop">
+                                    <label><strong>To Date</strong></label>
+                                    <mat-form-field id="matDate" appearance="outline">
+                                        <input matInput [matDatepicker]="picker2">
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-4 right" id="divTop">
+                                    <button mat-raised-button id="matButton" color="primary">Load</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-container" id="table">
+                                        <mat-table [dataSource]="dataSource" class="mat-table-fixed">
+
+                                            <ng-container matColumnDef="position" sticky>
+                                                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.positfion}} </mat-cell>
+                                                <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="name">
+                                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.nafme}} </mat-cell>
+                                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="weight">
+                                                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.weifght}} </mat-cell>
+                                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="symbol">
+                                                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.symbfol}} </mat-cell>
+                                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="Action" stickyEnd>
+                                                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <button mat-icon-button color="primary" matTooltip="View this row"
+                                                        id="iconTableButton" [matTooltipClass]="' custom-tip '">
+                                                        <mat-icon aria-label="View this row" class="f-14">
+                                                            remove_red_eye
+                                                        </mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button color="primary" matTooltip="Edit this row"
+                                                        id="iconTableButton" [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Edit this row" class="f-14">
+                                                            edit
+                                                        </mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button color="primary" matTooltip="Delete this row"
+                                                        id="iconTableButton" [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Delete this row" class="f-14">
+                                                            delete
+                                                        </mat-icon>
+                                                    </button>
+                                                </mat-cell>
+                                                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+                                            </mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true">
+                                            </mat-footer-row>
+
+                                        </mat-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 right">
+                                    <button mat-raised-button (click)='_router.navigate([_localStorage.getMenuPath()])'
+                                        id="matButton" color="warn">Exit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ****************************************** EXPORT ********************************************** -->
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <i id="pdf" class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Export To PDF</span>
+    </button>
+    <button mat-menu-item>
+        <i id="excel" class="fas fa-file-excel" aria-hidden="true"></i>
+        <span>Export To Excel</span>
+    </button>
+</mat-menu>

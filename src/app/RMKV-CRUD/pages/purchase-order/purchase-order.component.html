@@ -1,0 +1,393 @@
+<div class="outer-container">
+    <div class="inner-container">
+        <!-- ****************************************** LIST ********************************************** -->
+        <div *ngIf="componentVisibility" class="centered-content list">
+            <div class="card pageTop pageBottom" id="mainbox">
+                <div class="card-header docs-primary-header" id="mainheader">
+                    <div class="row">
+                        <div class="col-sm-8 col-70">
+                            <div id="height">Purchase Order</div>
+                        </div>
+                        <div class="col-sm-4 col-30 right">
+                            <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                <mat-button-toggle (click)="newClick()" id="iButton">
+                                    <mat-icon id="iconButton">add</mat-icon>
+                                </mat-button-toggle>
+                                <mat-button-toggle [matMenuTriggerFor]="menu" id="iButton">
+                                    <mat-icon id="iconButton">more_vert</mat-icon>
+                                </mat-button-toggle>
+                                <mat-button-toggle (click)='onClickExit()' id="iButton">
+                                    <mat-icon id="iconButton">clear</mat-icon>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><strong>From Date</strong></label>
+                                    <mat-form-field appearance="outline" id="matDate" class="example-full-width">
+                                        <input matInput id="fromDate" [(ngModel)]="objLoad.FromDate" #autocomplete
+                                            (keyup)="validateFromDate()" (focusout)="validateFromDate()" [min]="minDate"
+                                            [max]="maxDate" (keypress)="dateValidation.numberOnly($event)"
+                                            (ngModelChange)='matTableConfig()' autocomplete="off">
+                                        <input type="hidden" [(ngModel)]="fromDate1" [matDatepicker]="fromPicker"
+                                            placeholder="Choose a date" [min]="minimumDate" [max]="maximumDate"
+                                            (dateChange)="objLoad.FromDate = dateValidation.toFormattedDate($event.value);matTableConfig()">
+                                        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #fromPicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label><strong>To Date</strong></label>
+                                    <mat-form-field appearance="outline" id="matDate" class="example-full-width">
+                                        <input matInput id="toDate" [(ngModel)]="objLoad.ToDate" #autocomplete
+                                            (keyup)="validateToDate()" (focusout)="validateToDate()"
+                                            (ngModelChange)='matTableConfig()' [min]="objLoad.FromDate" [max]="maxDate"
+                                            (keypress)="dateValidation.numberOnly($event)" autocomplete="off">
+                                        <input type="hidden" [(ngModel)]="toDate1" [matDatepicker]="toPicker"
+                                            placeholder="Choose a date"
+                                            (dateChange)="objLoad.ToDate = dateValidation.toFormattedDate($event.value);matTableConfig()"
+                                            [min]="fromDate1" [max]="maximumDate">
+                                        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #toPicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><strong>Supplier Code</strong></label>
+                                    <input #loadSupplierCode [(ngModel)]='objLoad.supplier_code'
+                                        (keydown.Enter)='openLoadSupplierLookup($event)'
+                                        (input)="getLookupDetailsByCode('Suppliers','objLoad','supplier_code')"
+                                        (focusout)="checkValidCode('Suppliers','objLoad')" maxlength="10"
+                                        autocomplete="off"
+                                        class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label><strong>Supplier Name</strong></label>
+                                    <input [(ngModel)]='objLoad.supplier_name' disabled
+                                        class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-2 right" id="divTop">
+                                    <button mat-raised-button (click)='loadPurchaseOrders()' id="matButton"
+                                        color="primary">Load</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-container" id="table">
+                                        <mat-table #table [dataSource]="dataSource" class="mat-table-fixed">
+
+                                            <ng-container matColumnDef="position" sticky>
+                                                <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+                                                <mat-cell *matCellDef="let element; let i = index;" class="row-no">{{i +
+                                                    1}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="PONo">
+                                                <mat-header-cell *matHeaderCellDef> Po No </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <label id="labelBottom" [ngClass]="{'red': !element.active}">
+                                                        {{element.po_no}}
+                                                    </label>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="Date">
+                                                <mat-header-cell *matHeaderCellDef>Po Date </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <label id="labelBottom" [ngClass]="{'red': !element.active}">
+                                                        {{element.po_date | date: 'dd/MM/yyyy'}}
+                                                    </label>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="SupplierCode">
+                                                <mat-header-cell *matHeaderCellDef> Supplier Code </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <label id="labelBottom" [ngClass]="{'red': !element.active}">
+                                                        {{element.supplier_code}} - {{element.supplier_name}}
+                                                    </label>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="GrandTotal">
+                                                <mat-header-cell *matHeaderCellDef> Grand Total </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <label id="labelBottom" [ngClass]="{'red': !element.active}">
+                                                        {{element.grand_total | number: '1.2-2'}}
+                                                    </label>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <!-- <ng-container matColumnDef="ItemCode">
+                                                <mat-header-cell *matHeaderCellDef> Item Code </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.weifght}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="Qty">
+                                                <mat-header-cell *matHeaderCellDef> Qty </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.weifght}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="Rate">
+                                                <mat-header-cell *matHeaderCellDef> Rate </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.weifght}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="Total">
+                                                <mat-header-cell *matHeaderCellDef> Total Amount </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.weifght}} </mat-cell>
+                                            </ng-container> -->
+
+                                            <ng-container matColumnDef="Action" stickyEnd>
+                                                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                                                <mat-cell *matCellDef="let element">
+                                                    <button (click)="fetchPurchaseOrder(element,false,true)"
+                                                        mat-icon-button color="primary" matTooltip="View this row"
+                                                        id="iconTableButton" [matTooltipClass]="' custom-tip '">
+                                                        <mat-icon aria-label="View this row"
+                                                            [ngClass]="{'red': !element.active }" class="f-14">
+                                                            remove_red_eye
+                                                        </mat-icon>
+                                                    </button>
+                                                    <button (click)="fetchPurchaseOrder(element,true,false)"
+                                                        [disabled]='!element.active' mat-icon-button color="primary"
+                                                        matTooltip="Edit this row" id="iconTableButton"
+                                                        [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Edit this row"
+                                                            [ngClass]="{'red': !element.active }" class="f-14">
+                                                            edit
+                                                        </mat-icon>
+                                                    </button>
+                                                    <button *ngIf='element.active'
+                                                        (click)='onClickDeactivate(element,false)' mat-icon-button
+                                                        color="primary" [disabled]='!element.active'
+                                                        matTooltip="Deactivate this row" id="iconTableButton"
+                                                        [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Deactivate this row"
+                                                            [ngClass]="{'red': !element.active }" class="f-14">
+                                                            do_not_disturb_alt
+                                                        </mat-icon>
+                                                    </button>
+                                                    <button *ngIf='!element.active'
+                                                        (click)='onClickDeactivate(element,true)' mat-icon-button
+                                                        color="primary" [disabled]='element.active'
+                                                        matTooltip="Activate this row" id="iconTableButton"
+                                                        [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Activate this row" class="f-14">
+                                                            check_circle
+                                                        </mat-icon>
+                                                    </button>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+                                            </mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                                        </mat-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 right">
+                                    <button mat-raised-button (click)='onClickExit()' id="matButton"
+                                        color="warn">Exit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ****************************************** NEW ********************************************** -->
+        <div *ngIf="!componentVisibility" class="centered-content new">
+            <div class="card pageTop pageBottom" id="mainbox">
+                <div class="card-header docs-primary-header" id="mainheader">
+                    <div class="row">
+                        <div class="col-sm-8 col-70">
+                            <div id="height">Purchase Order Entry</div>
+                        </div>
+                        <div class="col-sm-4 col-30 right">
+                            <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                <mat-button-toggle (click)="onClear(true)" id="iButton">
+                                    <mat-icon id="iconButton">clear</mat-icon>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label><strong>Po No</strong></label>
+                                    <input [(ngModel)]='objPO.po_no' disabled
+                                        class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><strong>Po Date </strong></label>
+                                    <mat-form-field id="matDate" appearance="outline">
+                                        <input [(ngModel)]='objPO.po_date' matInput disabled [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix disabled [for]="picker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><strong>Supplier Code</strong></label>
+                                    <input #newSupplierCode [(ngModel)]='objPO.supplier_code'
+                                        (keydown.Enter)='openSupplierLookup($event)' [disabled]='objAction.isView'
+                                        (input)="getLookupDetailsByCode('Suppliers','objPO','supplier_code')"
+                                        (focusout)="checkValidCode('Suppliers','objPO')" autocomplete="off"
+                                        maxlength="10" class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label><strong>Supplier Name</strong></label>
+                                    <input [(ngModel)]='objPO.supplier_name' disabled
+                                        class="form-control form-control-sm border border-secondary" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label><strong>Grand Total</strong></label>
+                                    <input [(ngModel)]='objPO.grand_total' disabled
+                                        class="form-control form-control-sm border border-secondary right" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="table-scroll">
+                                <table border='1'>
+                                    <thead class="docs-primary-header">
+                                        <tr>
+                                            <th id="headerOne">S.No</th>
+                                            <!-- <th id="headerTwo">Po No</th> -->
+                                            <th id="headerTwo">Item Code</th>
+                                            <th id="headerTwo">Item Description</th>
+                                            <!-- <th id="headerTwo">UOM</th> -->
+                                            <th id="headerTwo">Qty</th>
+                                            <th id="headerTwo">Rate</th>
+                                            <th id="headerTwo">Total Amount</th>
+                                            <th id="headerLast">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor='let data of poDetailsList; let i = index;'>
+                                            <td id="columnCenter" (keyup)="onKeyFocusGlobal($event,i,0)">
+                                                {{i + 1}}
+                                            </td>
+                                            <td (keyup)="onKeyFocusGlobal($event,i,1)">
+                                                <input #itemCode [(ngModel)]='data.item_code'
+                                                    (keydown.Enter)='openItemCodeLookup($event,i)'
+                                                    (input)="getLookupDetailsByCode('Items','poDetailsList','item_code',i)"
+                                                    (focusout)="checkValidCode('Items','poDetailsList',i)"
+                                                    autocomplete="off" [disabled]='objAction.isView'
+                                                    class="form-control form-control-sm inputBox" type="text"
+                                                    name="name0" maxlength="10" autocomplete="off">
+                                            </td>
+                                            <td (keyup)="onKeyFocusGlobal($event,i,2)">
+                                                <input #itemDescription [(ngModel)]='data.item_description' disabled
+                                                    class="form-control form-control-sm inputBox" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td>
+                                            <!-- <td>
+                                                <input [(ngModel)]='data.uom_description' disabled
+                                                    class="form-control form-control-sm inputBox" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td> -->
+                                            <td (keyup)="onKeyFocusGlobal($event,i,3)">
+                                                <input #itemQty [(ngModel)]='data.item_qty'
+                                                    (click)='$event.target.select()' (focus)='$event.target.select()'
+                                                    [disabled]='objAction.isView' (focusout)="convertToDecimal(data,'')"
+                                                    (input)="calculateTotalAmount(data,'Quantity')" autocomplete="off"
+                                                    (keypress)="onlyAllowDecimalForDetails($event,99999,'poDetailsList','item_qty',i)"
+                                                    class="form-control form-control-sm inputBox right" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td>
+                                            <td (keyup)="onKeyFocusGlobal($event,i,4)">
+                                                <input #itemRate [(ngModel)]='data.item_rate'
+                                                    (click)='$event.target.select()' (focus)='$event.target.select()'
+                                                    [disabled]='objAction.isView' (focusout)="convertToDecimal(data,'')"
+                                                    (input)="calculateTotalAmount(data,'Rate')" autocomplete="off"
+                                                    (keypress)="onlyAllowDecimalForDetails($event,999999.99,'poDetailsList','item_rate',i)"
+                                                    class="form-control form-control-sm inputBox right" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td>
+                                            <td (keyup)="onKeyFocusGlobal($event,i,5)">
+                                                <input #totalAmt [(ngModel)]='data.total_amount' disabled
+                                                    class="form-control form-control-sm inputBox right" type="text"
+                                                    name="name0" maxlength="30" autocomplete="off">
+                                            </td>
+                                            <td (keyup)="onKeyFocusGlobal($event,i,6)">
+                                                <button #action *ngIf="poDetailsList.length-1 !== i"
+                                                    (click)='removeRowFromPoDetails(i)' [disabled]='objAction.isView'
+                                                    name="del" matTooltip="Remove" id="delbtn" class="btn btn-sm">
+                                                    <div id="iconBottom">
+                                                        <mat-icon id="iRed">
+                                                            delete
+                                                        </mat-icon>
+                                                    </div>
+                                                </button>
+                                                <button #action *ngIf='poDetailsList.length-1 === i'
+                                                    [disabled]="objAction.isView || _format.replaceInvalidString(data.item_code) === '' || _format.replaceInvalidNumber(data.item_qty) === 0 || _format.replaceInvalidNumber(data.item_rate) === 0 || _format.replaceInvalidNumber(data.total_amount) === 0 || data.total_amount < 0"
+                                                    (click)='addNewRowToPoDetails(i)' class="btn btn-sm"
+                                                    matTooltip="Add" name="add" id="addbtn">
+                                                    <div id="iconBottom">
+                                                        <mat-icon id="iGreen">
+                                                            add
+                                                        </mat-icon>
+                                                    </div>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 right">
+                                    <button mat-raised-button (click)='addPurchaseOrders()' id="matButton"
+                                        color="primary">{{objAction.isEditing ? 'Update' : 'Save'}}</button>&nbsp;
+                                    <button mat-raised-button (click)='onClear(false)' id="matButton"
+                                        color="warn">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ****************************************** EXPORT ********************************************** -->
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)='exportToPdf()'>
+        <i id="pdf" class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Export To PDF</span>
+    </button>
+    <button mat-menu-item (click)='exportToExcel()'>
+        <i id="excel" class="fas fa-file-excel" aria-hidden="true"></i>
+        <span>Export To Excel</span>
+    </button>
+</mat-menu>

@@ -1,0 +1,204 @@
+<!-- <div class="edit">
+    <div class="card" id="mainbox">
+        <div class="card-header docs-primary-header" id="mainheader">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="height">Attach Files</div>
+                </div>
+                <div class="col-sm-6" id="right">
+                    <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                        <mat-button-toggle (click)="onClear()" id="iButton">
+                            <mat-icon id="iconButton">clear</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" id="cardPadding">
+            <div class="card">
+                <div class="card-body" id="cardPadding">
+                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                        <thead style="background-color: aliceblue;">
+                            <tr>
+                                <th>Upload</th>
+                                <th>Progress</th>
+                                <th>View/Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;vertical-align: middle;width:8%;padding:4px !important">
+                                    <div class="upload-btn-wrapper">
+                                        <button [disabled]='isView' class="btn">Browse</button>
+                                        <input #docInput1 [disabled]='isView' (change)="uploadDocument($event,0)"
+                                            type="file" name="myfile" />
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:32%">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                            role="progressbar" [style.width.%]="attachment[0].Progress"
+                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            {{attachment[0].Progress}} %</div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:30%;text-align:center">
+                                    <label (click)='viewSelectedTempDocument(0)' 
+                                        *ngIf="tempBlob1 != undefined || tempBlob1 != null &&  objAttach[0].file_path == ''"
+                                        style="margin-bottom: 0px;" id='hide'>                                        
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label 
+                                        *ngIf="tempBlob1 != undefined || tempBlob1 != null && objAttach[0].file_path == ''  && !isView"
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide"
+                                        (click)='openRemoveTempFileConfirmationDialog(0)'>
+                                        Remove File
+                                    </label>
+                                    <label *ngIf="objAttach[0].file_path != ''" (click)='viewSelectedDocument(0)'
+                                        style="margin-bottom: 0px;margin-left: -15px !important;" id='hide'>                               
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label *ngIf="objAttach[0].file_path != ''  && !isView" 
+                                        (click)='openRemoveFileConfirmationDialog(0)'
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide">
+                                        Remove File
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;vertical-align: middle;width:8%;padding:4px !important">
+                                    <div class="upload-btn-wrapper">
+                                        <button [disabled]='isView' class="btn">Browse</button>
+                                        <input #docInput2 [disabled]='isView' (change)="uploadDocument($event,1)"
+                                            type="file" name="myfile" />
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:32%">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                            role="progressbar" [style.width.%]="attachment[1].Progress"
+                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            {{attachment[1].Progress}} %</div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:30%;text-align:center">
+                                    <label (click)="viewSelectedTempDocument(1)"
+                                        *ngIf="tempBlob2 != undefined || tempBlob2 != null &&  objAttach[1].file_path == ''"
+                                        style="margin-bottom: 0px;" id='hide'>
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label
+                                        *ngIf="tempBlob2 != undefined || tempBlob2 != null && objAttach[1].file_path == ''  && !isView"
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide"
+                                        (click)='openRemoveTempFileConfirmationDialog(1)'>
+                                        Remove File
+                                    </label>
+                                    <label *ngIf="objAttach[1].file_path != ''" (click)='viewSelectedDocument(1)'
+                                        style="margin-bottom: 0px;margin-left: -15px !important;" id='hide'>                                       
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label *ngIf="objAttach[1].file_path != ''  && !isView"
+                                        (click)='openRemoveFileConfirmationDialog(1)'
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide">
+                                        Remove File
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;vertical-align: middle;width:8%;padding:4px !important">
+                                    <div class="upload-btn-wrapper">
+                                        <button [disabled]='isView' class="btn">Browse</button>
+                                        <input #docInput3 [disabled]='isView' (change)="uploadDocument($event,2)"
+                                            type="file" name="myfile" />
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:32%">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                            role="progressbar" [style.width.%]="attachment[2].Progress"
+                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            {{attachment[2].Progress}} %</div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:30%;text-align:center">
+                                    <label (click)='viewSelectedTempDocument(2)'
+                                        *ngIf="tempBlob3 != undefined || tempBlob3 != null &&  objAttach[2].file_path == ''"
+                                        style="margin-bottom: 0px;" id='hide'>
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label
+                                        *ngIf="tempBlob3 != undefined || tempBlob3 != null && objAttach[2].file_path == ''  && !isView"
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide"
+                                        (click)='openRemoveTempFileConfirmationDialog(2)'>
+                                        Remove File
+                                    </label>
+                                    <label *ngIf="objAttach[2].file_path != ''" (click)='viewSelectedDocument(2)'
+                                        style="margin-bottom: 0px;margin-left: -15px !important;" id="hide">                                        
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label *ngIf="objAttach[2].file_path != ''  && !isView"
+                                        (click)='openRemoveFileConfirmationDialog(2)'
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide">
+                                        Remove File
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;vertical-align: middle;width:8%;padding:4px !important">
+                                    <div class="upload-btn-wrapper">
+                                        <button [disabled]='isView' class="btn">Browse</button>
+                                        <input #docInput4 [disabled]='isView' (change)="uploadDocument($event,3)"
+                                            type="file" name="myfile" />
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:32%">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                            role="progressbar" [style.width.%]="attachment[3].Progress"
+                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            {{attachment[3].Progress}} %</div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align:middle;padding:4px !important;width:30%;text-align:center">
+                                    <label (click)='viewSelectedTempDocument(3)'
+                                        *ngIf="tempBlob4 != undefined || tempBlob4 != null &&  objAttach[3].file_path == ''"
+                                        style="margin-bottom: 0px;" id='hide'>
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label
+                                        *ngIf="tempBlob4 != undefined || tempBlob4 != null && objAttach[3].file_path == ''  && !isView"
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide"
+                                        (click)='openRemoveTempFileConfirmationDialog(3)'>
+                                        Remove File
+                                    </label>
+                                    <label *ngIf="objAttach[3].file_path != ''" (click)='viewSelectedDocument(3)'
+                                        style="margin-bottom: 0px;margin-left: -15px !important;" id='hide'>
+                                        View File
+                                    </label>&nbsp;&nbsp;
+                                    <label *ngIf="objAttach[3].file_path != '' && !isView"
+                                        (click)='openRemoveFileConfirmationDialog(3)'
+                                        style="margin-bottom: 0px;color: red;cursor: pointer;" id="hide">
+                                        Remove File
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body" id="cardPadding">
+                    <div class="row">
+                        <div class="col-sm-12" id="right">
+                            <button *ngIf='!isView' id="matButton" mat-raised-button color="primary"
+                                (click)="onUploadDocuments()">Save</button>&nbsp;
+                            <button *ngIf='!isView' id="matButton" mat-raised-button color="warn" (click)="onClear()">Cancel</button>
+                            <button *ngIf='isView' id="matButton" mat-raised-button color="warn" (click)="onClear()">Exit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

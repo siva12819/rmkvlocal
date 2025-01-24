@@ -1,0 +1,617 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$mat-darkpink: (
+  50: #f3e7ec,
+  100: #e7d0da,
+  200: #d0a2b5,
+  300: #c48ba3,
+  400: #ad5c7e,
+  500: #a1456c,
+  600: #962e59,
+  700: #8a1747,
+  800: #7f0035,
+  900: #740031,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$my-app-primary: mat-palette($mat-indigo, 700, 500, 300);
+$my-app-accent: mat-palette($mat-darkpink, 700);
+$my-app-warn: mat-palette($mat-deep-orange, 700);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+.mat-header-cell {
+  color: mat-color($mat-grey, 50);
+}
+
+.mat-header-row {
+  background-color: mat-color($my-app-primary, 700);
+}
+
+.mat-footer-row {
+  background-color: mat-color($my-app-primary, 700);
+}
+
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+  background: mat-color($my-app-primary, 700);
+  border: 0.5px solid lightgray !important;
+}
+
+.docs-primary-header {
+  background-color: mat-color($my-app-primary, 700);
+  box-shadow: 1px 0px 2px 0px mat-color($my-app-primary, 700);
+}
+
+.mat-calendar-header {
+  background: mat-color($my-app-primary, 700);
+  color: #fff;
+}
+
+.mat-button-toggle-checked {
+  background-color: mat-color($my-app-primary, 700);
+  color: white;
+}
+
+.table-scroll th {
+  background-color: mat-color($my-app-primary, 700);
+}
+
+th.sticky {
+  background-color: mat-color($my-app-primary, 700);
+}
+
+svg.mat-paginator-icon {
+  color: mat-color($my-app-primary, 700);
+}
+
+.manualpaginator {
+  color: mat-color($my-app-primary, 700);
+}
+
+#hide {
+  color: mat-color($my-app-primary, 700);
+}
+
+mat-cell:first-of-type,
+mat-header-cell:first-of-type,
+mat-footer-cell:first-of-type {
+  border-left: 1px solid mat-color($my-app-primary, 700);
+}
+
+mat-cell:last-of-type {
+  border-left: 1px solid mat-color($my-app-primary, 700);
+}
+
+mat-cell:last-of-type,
+mat-header-cell:last-of-type,
+mat-footer-cell:last-of-type {
+  border-right: 1px solid mat-color($my-app-primary, 700);
+}
+
+.mat-cell {
+  border-right: 1px solid mat-color($my-app-primary, 700);
+}
+
+td.mat-cell {
+  border-bottom: 1px solid mat-color($my-app-primary, 700);
+}
+
+td.mat-cell:first-of-type {
+  border-left: 1px solid mat-color($my-app-primary, 700);
+}
+
+th.mat-header-cell:last-of-type {
+  border-right: 1px solid mat-color($my-app-primary, 700);
+}
+
+.mat-header-cell {
+  border-right: 1px solid white;
+}
+
+mat-footer-cell:last-of-type {
+  border-left: 1px solid white;
+}
+
+.mat-footer-cell {
+  border-right: 1px solid white;
+}
+
+.mat-row {
+  border-bottom: 1px solid mat-color($my-app-primary, 700);
+}
+
+#mainbox {
+  border: 2px solid mat-color($my-app-primary, 700);
+}
+
+#button {
+  border: 2px solid mat-color($my-app-primary, 700);
+}
+
+.docs-primary-header h1 {
+  color: #fff;
+}
+
+.default-theme-selector {
+  background-color: mat-color($mat-indigo, 700) !important;
+}
+
+#menuhover {
+  border-left: 4px solid mat-color($my-app-primary, 700) !important;
+}
+
+#menuhover:hover {
+  background-color: mat-color($my-app-primary, 700) !important;
+  color: white !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  font-weight: 700;
+  color: mat-color($my-app-primary, 700);
+}
+
+.form-select:disabled,
+.form-select[readonly] {
+  font-weight: 700;
+  color: mat-color($my-app-primary, 700);
+}
+
+.inputBox {
+  font-weight: bold;
+  color: mat-color($my-app-primary, 700);
+}
+
+// Red colors theme
+
+$red-primary: mat-palette($mat-red, 700, 100, 800);
+$red-accent: mat-palette($mat-green, 700, 100, 800);
+$red-warn: mat-palette($mat-cyan, 800);
+$red-theme: mat-light-theme($red-primary, $red-accent, $red-warn);
+
+.red-theme {
+  @include angular-material-theme($red-theme);
+}
+
+.red-theme .mat-header-cell {
+  color: mat-color($mat-grey, 50);
+}
+
+.red-theme .mat-header-row {
+  background-color: mat-color($mat-red, 700);
+}
+
+.red-theme .mat-footer-row {
+  background-color: mat-color($mat-red, 700);
+}
+
+.red-theme .table-scroll tfoot,
+.red-theme .table-scroll tfoot th,
+.red-theme .table-scroll tfoot td {
+  background: mat-color($mat-red, 700);
+}
+
+.red-theme .docs-primary-header {
+  background-color: mat-color($mat-red, 700);
+  box-shadow: 1px 0px 2px 0px mat-color($mat-red, 700);
+}
+
+.red-theme .manualpaginator {
+  color: mat-color($mat-red, 700);
+}
+
+.red-theme #hide {
+  color: mat-color($mat-red, 700);
+}
+
+.red-theme svg.mat-paginator-icon {
+  color: mat-color($mat-red, 700);
+}
+
+.red-theme mat-cell:first-of-type,
+.red-theme mat-header-cell:first-of-type,
+.red-theme mat-footer-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme mat-cell:last-of-type,
+.red-theme mat-header-cell:last-of-type,
+.red-theme mat-footer-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme mat-cell:last-of-type {
+  border-left: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme .table-scroll th {
+  background-color: mat-color($mat-red, 700);
+}
+
+.red-theme th.sticky {
+  background-color: mat-color($mat-red, 700);
+}
+
+.red-theme .mat-cell {
+  border-right: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme td.mat-cell {
+  border-bottom: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme td.mat-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme th.mat-header-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme .mat-header-cell {
+  border-right: 1px solid white;
+}
+
+.red-theme .mat-row {
+  border-bottom: 1px solid mat-color($mat-red, 700);
+}
+
+.red-theme-selector {
+  background-color: mat-color($mat-red, 700) !important;
+}
+
+.red-theme #mainbox {
+  border: 2px solid mat-color($mat-red, 700);
+}
+
+.red-theme #button {
+  border: 2px solid mat-color($mat-red, 700);
+}
+
+.red-theme .mat-calendar-header {
+  background: mat-color($mat-red, 700);
+  color: #fff;
+}
+
+.red-theme .mat-button-toggle-checked {
+  background-color: mat-color($mat-red, 700);
+  color: white;
+}
+
+.red-theme #menuhover {
+  border-left: 4px solid mat-color($mat-red, 700) !important;
+}
+
+.red-theme #menuhover:hover {
+  background-color: mat-color($mat-red, 700) !important;
+  color: white;
+}
+
+.red-theme .form-control:disabled,
+.form-control[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-red, 700);
+}
+
+.red-theme .form-select:disabled,
+.form-select[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-red, 700);
+}
+
+.red-theme .inputBox {
+  font-weight: 700;
+  color: mat-color($mat-red, 700);
+}
+
+//pink theme
+
+$pink-primary: mat-palette($mat-darkpink, 700);
+$pink-accent: mat-palette($mat-amber, A200, A100, A400);
+$pink-warn: mat-palette($mat-teal, 600);
+$pink-theme: mat-light-theme($pink-primary, $pink-accent, $pink-warn);
+
+.pink-theme {
+  @include angular-material-theme($pink-theme);
+}
+
+.pink-theme .docs-primary-header {
+  background-color: mat-color($mat-darkpink, 700);
+  box-shadow: 1px 0px 2px 0px mat-color($mat-darkpink, 700);
+}
+
+.pink-theme-selector {
+  background-color: mat-color($mat-darkpink, 700) !important;
+}
+
+.pink-theme .table-scroll th {
+  background-color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme th.sticky {
+  background-color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .manualpaginator {
+  color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme #hide {
+  color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme svg.mat-paginator-icon {
+  color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .mat-header-cell {
+  color: mat-color($mat-darkpink, 50);
+}
+
+.pink-theme .mat-header-row {
+  background-color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .mat-footer-row {
+  background-color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .table-scroll tfoot,
+.pink-theme .table-scroll tfoot th,
+.pink-theme .table-scroll tfoot td {
+  background: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme-selector {
+  background-color: mat-color($mat-darkpink, 700) !important;
+}
+
+.pink-theme #menuhover {
+  border-left: 4px solid mat-color($mat-darkpink, 700) !important;
+  color: black;
+}
+
+.pink-theme mat-cell:last-of-type {
+  border-left: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme #menuhover:hover {
+  background-color: mat-color($mat-darkpink, 700) !important;
+  color: white;
+}
+
+.pink-theme .mat-button-toggle-checked {
+  background-color: mat-color($mat-darkpink, 700);
+  color: white;
+}
+
+.pink-theme td.mat-cell {
+  border-bottom: 1px solid mat-color($mat-darkpink, 700) !important;
+}
+
+.pink-theme td.mat-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-darkpink, 700) !important;
+}
+
+.pink-theme th.mat-header-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-darkpink, 700) !important;
+}
+
+.pink-theme mat-cell:first-of-type,
+.pink-theme mat-header-cell:first-of-type,
+.pink-theme mat-footer-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme mat-cell:last-of-type,
+.pink-theme mat-header-cell:last-of-type,
+.pink-theme mat-footer-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme mat-cell:last-of-type {
+  border-left: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .mat-cell {
+  border-right: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme #mainbox {
+  border: 2px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme #button {
+  border: 2px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .mat-calendar-header {
+  background: mat-color($mat-darkpink, 700);
+  color: #fff;
+}
+
+.pink-theme .mat-header-cell {
+  border-right: 1px solid white;
+}
+
+.pink-theme .mat-row {
+  border-bottom: 1px solid mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .form-control:disabled,
+.form-control[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .form-select:disabled,
+.form-select[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-darkpink, 700);
+}
+
+.pink-theme .inputBox {
+  font-weight: 700;
+  color: mat-color($mat-darkpink, 700);
+}
+
+// Light theme
+
+$light-primary: mat-palette($mat-cyan, 700, 500, 300);
+$light-accent: mat-palette($mat-purple, 400);
+$light-warn: mat-palette($mat-darkpink, 600);
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+.light-theme {
+  @include angular-material-theme($light-theme);
+}
+
+.light-theme .docs-primary-header {
+  background-color: mat-color($mat-cyan, 700);
+  box-shadow: 1px 0px 2px 0px mat-color($mat-light-blue, 200);
+}
+
+.light-theme svg.mat-paginator-icon {
+  color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .manualpaginator {
+  color: mat-color($mat-cyan, 700);
+}
+
+.light-theme #hide {
+  color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .mat-header-cell {
+  color: mat-color($mat-grey, 50);
+}
+
+.light-theme .mat-calendar-header {
+  background: mat-color($mat-cyan, 700);
+  color: #fff;
+}
+
+.light-theme .mat-header-row {
+  background-color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .mat-footer-row {
+  background-color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .table-scroll tfoot,
+.light-theme .table-scroll tfoot th,
+.light-theme .table-scroll tfoot td {
+  background: mat-color($mat-cyan, 700);
+}
+
+.light-theme-selector {
+  background-color: mat-color($mat-cyan, 700) !important;
+}
+
+.light-theme .table-scroll th {
+  background-color: mat-color($mat-cyan, 700);
+}
+
+.light-theme th.sticky {
+  background-color: mat-color($mat-cyan, 700);
+}
+
+.light-theme #mainbox {
+  border: 2px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme #button {
+  border: 2px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme mat-cell:last-of-type {
+  border-left: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme #menuhover {
+  border-left: 4px solid mat-color($mat-cyan, 700) !important;
+}
+
+.light-theme #menuhover:hover {
+  background-color: mat-color($mat-cyan, 700) !important;
+  color: white;
+}
+
+.light-theme .mat-button-toggle-checked {
+  background-color: mat-color($mat-cyan, 700) !important;
+  color: white;
+}
+
+.light-theme mat-cell:first-of-type,
+.light-theme mat-header-cell:first-of-type,
+.light-theme mat-footer-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme mat-cell:last-of-type,
+.light-theme mat-header-cell:last-of-type,
+.light-theme mat-footer-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme mat-cell:last-of-type {
+  border-left: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme td.mat-cell {
+  border-bottom: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme td.mat-cell:first-of-type {
+  border-left: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme th.mat-header-cell:last-of-type {
+  border-right: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme .mat-cell {
+  border-right: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme .mat-header-cell {
+  border-right: 1px solid white;
+}
+
+.light-theme .mat-row {
+  border-bottom: 1px solid mat-color($mat-cyan, 700);
+}
+
+.light-theme .form-control:disabled,
+.form-control[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .form-select:disabled,
+.form-select[readonly] {
+  font-weight: 700;
+  color: mat-color($mat-cyan, 700);
+}
+
+.light-theme .inputBox {
+  font-weight: 700;
+  color: mat-color($mat-cyan, 700);
+}
+

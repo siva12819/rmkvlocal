@@ -1,0 +1,203 @@
+<div class="outer-container">
+    <div class="inner-container">
+             <!-- ****************************************** LIST ********************************************** -->
+             <div *ngIf="componentVisibility" class="centered-content list">
+                <div class="card pageTop pageBottom" id="mainbox">
+                    <div class="card-header docs-primary-header" id="mainheader">
+                        <div class="row">
+                            <div class="col-sm-8 col-70">
+                                <div id="height">Supplier Master</div> 
+                            </div>
+                            <div class="col-sm-4 col-30 right">
+                                <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                    <mat-button-toggle (click)="newClick()" id="iButton">
+                                        <mat-icon id="iconButton">add</mat-icon>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle [matMenuTriggerFor]="menu" id="iButton">
+                                        <mat-icon id="iconButton">more_vert</mat-icon>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle (click)='onClickExit()'
+                                        id="iButton">
+                                        <mat-icon id="iconButton">clear</mat-icon>
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label><strong> Search </strong></label>
+                                        <input cdkFocusInitial [(ngModel)]="searchString"
+                                        (keyup)="searchSupplierCode(searchString)" maxlength="10" class="form-control form-control-sm border border-secondary" />
+                                    </div>
+                                    <div class="col-sm-5" id="right">
+                                        <div class="form-group" id="top">
+                                            <mat-radio-group>
+                                                <mat-radio-button (change)="radioChange($event)" checked [value]="2">All
+                                                </mat-radio-button>
+                                                <mat-radio-button (change)="radioChange($event)" [value]="1">Active
+                                                </mat-radio-button>
+                                                <mat-radio-button (change)="radioChange($event)" [value]="0">Inactive
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                   </div>
+                            </div>
+                        </div> 
+                        <div class="card" id="cardTop">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-container" id="table">
+                                            <mat-table [dataSource]="dataSource" class="mat-table-fixed">
+    
+                                                <ng-container matColumnDef="Sno" sticky>
+                                                    <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element; let i = index;" class="row-no" [ngClass]="{'red': !element.active }">{{i + 1}} </mat-cell> 
+                                                 </ng-container>
+                                                
+                                                <ng-container matColumnDef="Code">
+                                                    <mat-header-cell *matHeaderCellDef> Supplier Code </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" [ngClass]="{'red': !element.active }"> {{element.supplier_code}} </mat-cell>
+                                                </ng-container>
+    
+                                                <ng-container matColumnDef="Name">
+                                                    <mat-header-cell *matHeaderCellDef>Supplier Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" [ngClass]="{'red': !element.active }"> {{element.supplier_name}} </mat-cell>
+                                                </ng-container>
+    
+                                                <ng-container matColumnDef="GSTno">
+                                                    <mat-header-cell *matHeaderCellDef> GST No </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element" [ngClass]="{'red': !element.active }"> {{element.supplier_gst_no}} </mat-cell>
+                                                </ng-container>
+    
+                                                <ng-container matColumnDef="Action" stickyEnd>
+                                                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element;let i = index">
+                                                        <button mat-icon-button color="primary" (click)='modifyorView(false,element.supplier_code,true)' matTooltip="View this row"
+                                                            id="iconTableButton" [matTooltipClass]="' custom-tip '">
+                                                            <mat-icon aria-label="View this row" class="f-14">
+                                                                remove_red_eye
+                                                            </mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button color="primary" (click)='modifyorView(true,element.supplier_code)' matTooltip="Edit this row"
+                                                            id="iconTableButton" [matTooltipClass]="'custom-tip'">
+                                                            <mat-icon aria-label="Edit this row" class="f-14">
+                                                                edit
+                                                            </mat-icon>
+                                                        </button>
+                                                        <button mat-icon-button color="primary" (click)="onClickActive(i)"
+                                                        matTooltip="Activate this row" id="iconTableButton"
+                                                        [disabled]="element.active === true"
+                                                        [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="Activate this row"
+                                                            class="f-14">
+                                                            check_circle
+                                                        </mat-icon>
+                                                    </button>
+                                                        <button mat-icon-button color="primary" matTooltip="deactive this row"
+                                                        (click)='onClickDeactivate(i)' id="iconTableButton" [disabled]="element.active === false"
+                                                        [matTooltipClass]="'custom-tip'">
+                                                        <mat-icon aria-label="deactive this row" class="f-14">
+                                                            cancel
+                                                        </mat-icon>
+                                                    </button>
+                                                    </mat-cell>
+                                                </ng-container>
+    
+                                                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
+                                                </mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+                                            </mat-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" id="cardTop">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 right">
+                                        <button mat-raised-button (click)='onClickExit()'
+                                            id="matButton" color="warn">Exit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- ****************************************** NEW ********************************************** -->
+        <div *ngIf="!componentVisibility" class="centered-content new">
+            <div class="card pageTop pageBottom" id="mainbox">
+                <div class="card-header docs-primary-header" id="mainheader">
+                    <div class="row">
+                        <div class="col-sm-8 col-70">
+                            <div id="height">Supplier Master Entry</div>
+                        </div>
+                        <div class="col-sm-4 col-30 right">
+                            <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                <mat-button-toggle (click)="onClear(true)" id="iButton">
+                                    <mat-icon id="iconButton">clear</mat-icon>
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <label><strong>Supplier Code</strong></label>
+                                  <input id="code" disabled [(ngModel)]="objSupplierMaster.supplier_code" class="form-control form-control-sm border border-secondary"/>
+                              </div>
+                              <div class="col-sm-6">
+                                <label><strong>GST No</strong></label>
+                                <input id="gstNo" [(ngModel)]="objSupplierMaster.supplier_gst_no" [disabled]='objAction.isView' maxlength="20" class="form-control form-control-sm border border-secondary"/>
+                            </div>
+                           
+                          </div>
+
+                          <div class="row Top">
+                            <div class="col-sm-12">
+                                <label><strong>Supplier Name</strong></label>
+                                <input id="supplierName" [(ngModel)]="objSupplierMaster.supplier_name" [disabled]='objAction.isView' maxlength="100" class="form-control form-control-sm border border-secondary"/>
+                            </div>
+                        </div>
+                     
+                        </div>
+                    </div>
+                    <div class="card" id="cardTop">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 right">
+                                    <button *ngIf='!objAction.isView' mat-raised-button id="matButton" color="primary" (click)="addSupplierMaster()">{{objAction.isEditing ? 'Update' : 'Save'}}</button>&nbsp;
+                                    <button *ngIf='!objAction.isView' mat-raised-button id="matButton" color="warn" (click)="onClear(false)">Clear</button>                                    
+                                    <button *ngIf='objAction.isView' id="matButton" (click)="onClear(true)" mat-raised-button color="warn">Exit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    </div>
+</div>
+<!-- ****************************************** EXPORT ********************************************** -->
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)='exportToPdf()'>
+        <i id="pdf" class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Export To PDF</span>
+    </button>
+    <button mat-menu-item (click)='exportToExcel()'>
+        <i id="excel" class="fas fa-file-excel" aria-hidden="true"></i>
+        <span>Export To Excel</span>
+    </button>
+</mat-menu>

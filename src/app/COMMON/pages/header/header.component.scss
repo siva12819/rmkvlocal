@@ -1,0 +1,128 @@
+button.mat-flat-button {
+  line-height: 35px;
+  padding: 0 8px;
+}
+
+.dropdown-item {
+  display: block;
+  font-family: Roboto !important;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.material-icons {
+  line-height: 1.5;
+}
+
+.theme-pulse.noti-pulse {
+  position: absolute;
+  top: 5px;
+  margin-left: 2px;
+}
+
+#headerfixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+}
+
+#fixedpage {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#fullSizePage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+  background:#E4E7EE;
+}
+
+#menuhover {
+  color: black;
+}
+
+.navbar {
+  padding: 0px;
+}
+
+.bg-light {
+  background-color: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar-toggler {
+    float: right;
+    display: block;
+    margin-right: 5px;
+  }
+  .mb-1 {
+    float: left;
+    display: block;
+    margin-left: 5px;
+    color: white;
+  }
+  #fixedpage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .navbar-toggler {
+    float: right;
+    display: block;
+    margin-right: 5px;
+  }
+  .mb-1 {
+    float: left;
+    display: block;
+    margin-left: 5px;
+    color: white;
+  }
+}
+
+.docs-primary-header {
+  padding-left: 0px;
+}
+
+#fixedBotButton {
+  position: fixed;
+  bottom: 0px;
+}
+
+.fixedIconBottom {
+  position: absolute;
+  z-index: 999;
+}

@@ -1,0 +1,62 @@
+<div class="card" (keypress)="determineEnterKey($event)" id="mainbox">
+    <div class="card-header docs-primary-header" id="mainheader">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="height">Item Code</div>
+            </div>
+            <div class="col-sm-6" id="right">
+                <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                    <mat-button-toggle (click)="dialogClose()" id="iButton">
+                        <mat-icon id="iconButton">clear</mat-icon>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" id="cardPadding">
+        <input id="searchInput" cdkFocusInitial [(ngModel)]="_data.searchString"
+            (keyup)="searchItemCode(_data.searchString, $event)" autocomplete="off" placeholder="Search For Code"
+            class="form-control form-control-sm">
+        <div class="card" style="border-radius:0px;margin-top:10px">
+            <div class="card-body" id="cardPadding">
+                <div class="table-scroll">
+                    <table class="scrollToMe" border='1' id='lookupTable' style="cursor: pointer;">
+                        <thead class="docs-primary-header" style="text-align: center;">
+                            <tr>
+                                <th id="headerCode">Item Code</th>
+                                <th id="headerName">Description </th>
+                            </tr>
+                        </thead>
+                        <tbody (keypress)="determineEnterKey($event)" class="scrollable">
+                            <tr *ngFor="let data of filterItemLookUp; let i = index" id='row{{i}}'
+                                (keypress)="onClick(data,$event)" (dblclick)='onDoubleClick(data)'
+                                (click)="selectedRowIndex = i" [ngClass]="{ highlight: selectedRowIndex == i }">
+                                <td style="text-align: left;padding-left:4px;height: 27px;">{{ data.item_code }}</td>
+                                <td  [matTooltip]="data.item_description" matTooltipPosition="above" style="text-align: left;padding-left:4px;height: 27px;overflow: hidden;
+                                cursor: pointer;
+                                text-overflow: ellipsis !important;
+                                white-space: nowrap !important;
+                                text-align: left;
+                                padding-left: 5px;
+                                max-width: 262px;
+                                margin-bottom: 0px;">{{ data.item_description }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 10px;">
+            <div class="card-body" id="cardPadding">
+                <div class="row">
+                    <div class="col-sm-12" id="right">
+                        <button id="matButton" mat-raised-button (click)="dialogOK()"
+                            color="primary">Select</button>&nbsp;
+                        <button id="matButton" mat-raised-button (click)="dialogClose()" color="warn">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<style>
+    #fixedpage {
+        background-image: url("assets/images/common/categories-background.png");
+    }
+</style>
+<div class="wrapper">
+    <div>
+        <div class="navbar navbar-expand-lg  docs-primary-header" id="headerfixed">
+            <div class="container-fluid" style="padding-left:10px">
+                <a>
+                    <button style="color:white" mat-icon-button class="mb-1">
+                        <i style="font-size:20px;line-height:0px" class="material-icons">home</i>
+                    </button>
+                </a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    style="border-radius:5px;height:30px;width:35px;color:white" color="primary">
+                    <mat-icon style="line-height: 0.8;">list</mat-icon>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <div>
+                            <button mat-flat-button [matMenuTriggerFor]="CRUD"
+                                style="color: white;background: inherit;font-size: 12px">
+                                CRUD
+                                <mat-icon style="font-size: 15px">expand_more</mat-icon>
+                            </button>
+                            <mat-menu #CRUD="matMenu">
+                                <button id="menuhover" [routerLink]="'/RMKV-CRUD/ItemMaster'" style="font-size: 12px" mat-menu-item>
+                                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> &nbsp;
+                                    <span>
+                                        Item Master
+                                    </span>
+                                </button>
+                                <button id="menuhover" [routerLink]="'/RMKV-CRUD/SupplierMaster'" style="font-size: 12px" mat-menu-item>
+                                    <i class="fas fa-chevron-circle-down" aria-hidden="true"></i> &nbsp;
+                                    <span>
+                                        Supplier Master
+                                    </span>                                    
+                                </button>
+                                <button id="menuhover" [routerLink]="'/RMKV-CRUD/PurchaseOrder'" style="font-size: 12px" mat-menu-item>
+                                    <i class="fas fa-chevron-circle-down" aria-hidden="true"></i> &nbsp;
+                                    <span>
+                                        Purchase Order
+                                    </span>                                    
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </ul>
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item dropdown" style="width:35px;height:35px">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" color="default"
+                                style="color:white;padding-top:4px">
+                                <mat-icon style="font-size:18px">format_color_fill</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu" class="docs-theme-picker-menu">
+                                <div class="d-flex justify-content-around my-2">
+                                    <button mat-mini-fab class="default-theme-selector"
+                                        (click)="onSetTheme('default-theme')" matTooltip="Default Theme"></button>
+                                    <button mat-mini-fab class="red-theme-selector" (click)="onSetTheme('red-theme')"
+                                        matTooltip="red Theme"></button>
+                                </div>
+                                <div class="d-flex justify-content-around my-2">
+                                    <button mat-mini-fab class="pink-theme-selector" (click)="onSetTheme('pink-theme')"
+                                        matTooltip="Pink Theme"></button>
+                                    <button mat-mini-fab class="light-theme-selector"
+                                        (click)="onSetTheme('light-theme')" matTooltip="Light Theme"></button>
+                                </div>
+                            </mat-menu>
+                        </li>
+                        <li class="nav-item" style="width:30px;text-align:center">
+                            <app-fullscreen></app-fullscreen>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fixedIconBottom">
+                <div class="navbar navbar-expand-lg docs-primary-header" id="fixedBotButton" style="width:100%">
+                    <div class="container-fluid" style="text-align: center;justify-content: center;">
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: center;color:white">
+                                <label style="margin-top: 5px;margin-bottom: 5px;font-weight:bold">RMKV CRUD</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="fixedpage">
+        <router-outlet></router-outlet>
+    </div>
+</div>

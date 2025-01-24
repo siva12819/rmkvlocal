@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12" id="responsive">
+            <div class="new">
+                <div class="card" id="mainbox">
+                    <div class="card-header docs-primary-header" id="mainheader">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div id="height">Reason</div>
+                            </div>
+                            <div class="col-sm-6" id="right">
+                                <mat-button-toggle-group id="group" #group="matButtonToggleGroup">
+                                    <mat-button-toggle id="iButton" (click)='dialogClosed()'>
+                                        <mat-icon id="iconButton">clear</mat-icon>
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" id="cardPadding">
+                        <div class="card">
+                            <div class="card-body" id="cardPadding">
+                                <label><strong>Enter Reason</strong></label>
+                                <textarea id="remarks" [(ngModel)]="Reason"
+                                    style="height: 70px;text-align: justify;resize: none;" rows="3" maxlength="200"
+                                    class="form-control form-control-sm border border-secondary">
+                                             </textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body" id="cardPadding">
+                                <div class="row">
+                                    <div class="col-sm-12" id="right">
+                                        <button id="matButton" mat-raised-button color="primary"
+                                            (click)="addReason()">Cancel</button>&nbsp;
+                                        <button id="matButton" mat-raised-button color="warn"
+                                            (click)="dialogClosed()">Exit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

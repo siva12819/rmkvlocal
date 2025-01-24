@@ -1,0 +1,22 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+    <span *ngFor="let child of items">
+        <span *ngIf="child.Children && child.Children.length > 0">
+            <button
+                *ngIf="child.DisplayName != '' && child.DisplayName != null && child.DisplayName != 'New Bill'"
+                id="menuhover" mat-menu-item [matMenuTriggerFor]="menu.childMenu" style="font-size: 12px">
+                <i [class]="child.IconName" aria-hidden="true"></i> &nbsp;
+                <span>{{child.DisplayName}}</span>
+            </button>
+            <app-child-menu-items #menu [items]="child.Children"></app-child-menu-items>
+        </span>
+        <span *ngIf="!child.Children || child.Children.length === 0">
+            <button
+                *ngIf="child.DisplayName != '' && child.DisplayName != null && child.DisplayName != 'New Bill'"
+                id="menuhover" mat-menu-item (click)="getMenu(child.Route)"
+                style="padding-top:0px;padding-bottom: 0px ;border-bottom: 0px;font-size: 12px;">
+                <i [class]="child.IconName" aria-hidden="true"></i> &nbsp;
+                <span>{{child.DisplayName}}</span>
+            </button>
+        </span>
+    </span>
+</mat-menu>

@@ -1,0 +1,30 @@
+
+.new {
+    margin-top: 5%;
+    width: 400px;
+  }
+  
+  .form-control {
+    border-radius: 0px;
+    background-color: white;
+  }
+  
+  
+  @media screen and (max-width: 500px) {
+    .new {
+      width: 100%;
+    }
+  
+  }
+  #cardPadding {
+    padding: 15px;
+  }
+  
+  #matDate {
+    margin-top: -13px;
+    margin-bottom: -17px;
+    // width: 128%;
+  }
+  #top {
+    padding-top:8px
+  }

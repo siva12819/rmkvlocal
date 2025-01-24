@@ -1,0 +1,37 @@
+<div class="card" id="login">
+    <div class="card-body">
+        <div class="col-sm-12" style="text-align:center;">
+            <h5 id="hide" style="font-size:16px;font-weight: 1000;">LOCKED</h5>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput pattern="[a-zA-Z]*" minlength="5" maxlength="30" id="usr" name="User_Name"
+                                style="font-size:13px;" [(ngModel)]="model.username" placeholder="User Name">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div style="margin-top:1%">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="password" minlength="5" maxlength="13" id="pwd" name="Password"
+                                [(ngModel)]="model.password" placeholder="Password">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="text-align:center">
+                    <button color="primary" mat-raised-button (click)="onNoClick()"
+                        style="border-radius:500px;border-color: #BABCBF;color: #FFFFFF;width: 70%;height: 35px;font-size:15px">UNLOCK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
