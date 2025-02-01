@@ -10,6 +10,8 @@ RUN rm -rf dist*
 
 RUN rm -rf node-mod*
 
+RUN npm cache clean --force
+
 RUN npm install --force 
 
 RUN npm run build --prod 
